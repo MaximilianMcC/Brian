@@ -1,4 +1,4 @@
-import discord, json
+import discord, json, random
 
 # Get the config data
 config = json.load(open("./config.json", "r"))
@@ -34,6 +34,7 @@ async def info(ctx):
     You can use the `/github` command to view Brian's Github repository
     """
     embed = discord.Embed(title="Brian Information", description=description)
+    embed.color = 0xeda711
 
     # Send the embed
     await ctx.respond(embed=embed)
@@ -50,6 +51,7 @@ async def github(ctx):
     Click the button below to visit the repo.
     """
     embed = discord.Embed(title="GitHib link", description=description)
+    embed.color = 0xeda711
     embed.set_thumbnail(url="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
 
     # Make a button with the github link
@@ -58,6 +60,21 @@ async def github(ctx):
 
     # Send the embed
     await ctx.respond(embed=embed, view=view)
+
+
+# Coin flip command
+@brian.slash_command(description="Flip a coin and get heads or tails")
+async def coinflip(ctx):
+
+    # Flip the coin
+    flip = random.choice(["Heads", "Tails"])
+
+    embed = discord.Embed(title=f"The answer is **{flip}**!")
+    embed.color = 0xeda711
+    embed.set_image(url="https://media.tenor.com/tewn7lzVDgcAAAAC/coin-flip-flip.gif")
+
+    await ctx.respond(embed=embed)
+
 
 # Start Brian
 print("Loading...")
