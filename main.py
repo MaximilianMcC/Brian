@@ -76,6 +76,11 @@ async def coinflip(ctx):
     await ctx.respond(embed=embed)
 
 
+# Random number command
+@brian.slash_command(description="Get a random number")
+async def randomnumber(ctx, min: int, max: int):
+    await ctx.respond(random.randrange(min, max))
+
 # Start Brian
 print("Loading...")
 brian.run(config["token"])
