@@ -1,4 +1,5 @@
 import discord, json, random
+import openai
 
 # Get the config data
 config = json.load(open("./config.json", "r"))
@@ -8,6 +9,9 @@ config = json.load(open("./config.json", "r"))
 # Make brian
 brian = discord.Bot(debug_guilds=config["debug_guilds"])
 
+
+# Set the open ai key
+openai.api_key = config["openai_key"]
 
 
 # When Brian is ready
@@ -78,8 +82,37 @@ async def coinflip(ctx):
 
 # Random number command
 @brian.slash_command(description="Get a random number")
-async def randomnumber(ctx, min: int, max: int):
+async def random_number(ctx, min: int, max: int):
     await ctx.respond(random.randrange(min, max))
+
+
+# Art prompt generator
+@brian.slash_command(description="Generate an art prompt using AI")
+async def art_prompt(ctx):
+
+    # Get the prompt
+    prompt = "Generate a short prompt in Photoshop. This must include theme subject place and media type. The media type could be something like movie poster,billboard advertisement,album cover,etc..."
+
+    # Ask OpenAI the question
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        temperature=1,
+        max_tokens=2000
+    )
+
+    # Parse the output
+    output = response["choices"][0]["text"].strip()
+
+    # Put it in an embed
+    description = f"Your prompt is...\n***{output}***"
+    embed = discord.Embed(title="Art prompt result:", description=description)
+    embed.color = 0xeda711
+    embed.set_footer(text="🚨🚨⚠️Please do not spam this command. It was generated using AI and is expensive to run🤓")
+    await ctx.respond(embed=embed)
+
+
+
 
 # Start Brian
 print("Loading...")

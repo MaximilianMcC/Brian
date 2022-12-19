@@ -15,8 +15,7 @@ If you'd like to clone the bot you must make a `config.json` file in the root di
 ```
 - `token` is used to make the Discord bot
 - `debug_guilds` are used to test the bot's slash commands
-- `openai_key` is used to generate Photoshop ideas using AI
-
+- `openai_key` is used to generate art ideas using AI
 
 
 **You can use *[this link](https://discord.com/api/oauth2/authorize?client_id=823113494500605975&permissions=8&scope=bot%20applications.commands)* to invite Brian to your server**
