@@ -1,5 +1,5 @@
-import discord, json, random
-import openai
+import discord, json, random, openai, requests
+from datetime import datetime
 
 # Get the config data
 config = json.load(open("./config.json", "r"))
@@ -112,6 +112,22 @@ async def art_prompt(ctx):
     await ctx.respond(embed=embed)
 
 
+# Day command
+@brian.slash_command(description="Get a gif about the current day")
+async def day(ctx):
+
+    # Settings
+    # TODO: Get my own key not the tutorial one
+    key = "LIVDSRZULELA"
+    results = 4
+    prompt = datetime.now().strftime("%A") + " day"
+
+    # Get the gif
+    request = requests.get(f"https://g.tenor.com/v1/search?q={prompt}&key={key}&limit={results}")
+    gif_json = json.loads(request.content)
+    gif = gif_json["results"][random.randrange(1, results)]["url"]
+
+    await ctx.respond(gif)
 
 
 # Start Brian
