@@ -7,10 +7,10 @@ A multipurpose Discord bot.
 If you'd like to clone the bot you must make a `config.json` file in the root directory. This is what the file should look like:
 ```json
 {
-    "token": "<discord bot token>",
+    "token": <discord bot token>,
     "debug_guilds": [<debug guild id>, <debug guild id>, <debug guild id>],
 
-    "openai_key": "<openai api key>"
+    "openai_key": <openai api key>
 }
 ```
 - `token` is used to make the Discord bot
