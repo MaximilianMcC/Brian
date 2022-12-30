@@ -91,7 +91,7 @@ async def random_number(ctx, min: int, max: int):
 async def art_prompt(ctx):
 
     # Get the prompt
-    prompt = "Generate a short prompt in Photoshop. This must include theme subject place and media type. The media type could be something like movie poster,billboard advertisement,album cover,etc..."
+    prompt = "Create a short photoshop idea for a photoshop battle"
 
     # Ask OpenAI the question
     response = openai.Completion.create(
@@ -108,7 +108,6 @@ async def art_prompt(ctx):
     description = f"Your prompt is...\n***{output}***"
     embed = discord.Embed(title="Art prompt result:", description=description)
     embed.color = 0xeda711
-    embed.set_footer(text="🚨🚨⚠️Please do not spam this command. It was generated using AI and is expensive to run🤓")
     await ctx.respond(embed=embed)
 
 
@@ -118,6 +117,7 @@ async def day(ctx):
 
     # Settings
     # TODO: Get my own key not the tutorial one
+    # TODO: Make the command run at the start of every day automatically
     key = "LIVDSRZULELA"
     results = 4
     prompt = datetime.now().strftime("%A") + " day"
@@ -129,6 +129,8 @@ async def day(ctx):
 
     await ctx.respond(gif)
 
+
+# 
 
 # Start Brian
 print("Loading...")
