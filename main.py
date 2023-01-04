@@ -137,21 +137,30 @@ async def ai_image(ctx, prompt: str):
     # Wait until it gets a response
     await ctx.defer()
 
-    # Generate the image with openai
-    response = openai.Image.create(
-        prompt=prompt,
-        n=1,
-        size="1024x1024"
-    )
-
-    # Get the image URL
-    image = response["data"][0]["url"]
-
     # Make an embed and send it all
     embed = discord.Embed(title=f"\"{prompt}\"")
     embed.color = 0xeda711
-    embed.set_image(url=image)
 
+
+    # Generate the image with openai
+    try:
+        response = openai.Image.create(
+            prompt=prompt,
+            n=1,
+            size="1024x1024"
+        )
+
+        # Get and set the image
+        image = response["data"][0]["url"]
+        embed.set_image(url=image)
+
+    except openai.error.InvalidRequestError:
+
+        # Send an error if the prompt wasn't good
+        embed.description = "😠Your prompt is inappropriate and violent😲🚨🚨"        
+
+
+    # Send the embed
     await ctx.respond(embed=embed)
 
 
