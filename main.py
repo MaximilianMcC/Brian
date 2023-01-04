@@ -130,7 +130,30 @@ async def day(ctx):
     await ctx.respond(gif)
 
 
-# 
+# AI image command
+@brian.slash_command(description="Generate an image from a prompt using AI")
+async def ai_image(ctx, prompt: str):
+    
+    # Wait until it gets a response
+    await ctx.defer()
+
+    # Generate the image with openai
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size="1024x1024"
+    )
+
+    # Get the image URL
+    image = response["data"][0]["url"]
+
+    # Make an embed and send it all
+    embed = discord.Embed(title=f"\"{prompt}\"")
+    embed.color = 0xeda711
+    embed.set_image(url=image)
+
+    await ctx.respond(embed=embed)
+
 
 # Start Brian
 print("Loading...")
