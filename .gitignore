@@ -134,3 +134,6 @@ dmypy.json
 
 # Config file
 /config.json
+
+# test file
+/test
