@@ -17,6 +17,13 @@ If you'd like to clone the bot you must make a `config.json` file in the root di
 - `debug_guilds` are used to test the bot's slash commands
 - `openai_key` is used to generate art ideas using AI
 
+This bot uses the many different libraries to work. Here are the commands needed to install them:
+```sh
+pip install discord.py
+pip install json
+pi install openai
+```
+
 
 **You can use *[this link](https://discord.com/api/oauth2/authorize?client_id=823113494500605975&permissions=8&scope=bot%20applications.commands)* to invite Brian to your server**
 
